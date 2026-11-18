@@ -62,7 +62,7 @@ class QuantizedWeight:
     значения вдоль K: младший ниббл — чётный индекс, старший — нечётный.
 
     Attributes:
-        q (torch.Tensor): Упакованные INT4-коды, форма ``[K // 2, N]``,
+        q (torch.Tensor): Упакованные INT4-коды, форма `[K // 2, N]`,
             dtype ``torch.int8`` (или ``torch.uint8``). Каждый элемент —
             два INT4.
         scales (torch.Tensor): Масштабы квантования по группам, форма
