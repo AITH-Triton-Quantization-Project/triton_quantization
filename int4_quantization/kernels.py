@@ -123,5 +123,10 @@ def compute_scale_kernel(
     scale = tl.maximum(amax / 7.0, 1e-5)
 
     mask_s = (offs_m[:, None] < M) & (offs_g[None, :] < tl.cdiv(N, GROUP_SIZE))
-    tl.store(scale_ptr + offs_m[:, None] * (N // GROUP_SIZE + 1) + offs_g[None, :],
-             scale.to(tl.float16), mask=mask_s)
+    # Строка scales имеет длину N // GROUP_SIZE. Лишний +1 сдвигал каждую
+    # следующую строку и писал мимо буфера на больших матрицах.
+    tl.store(
+        scale_ptr + offs_m[:, None] * (N // GROUP_SIZE) + offs_g[None, :],
+        scale.to(tl.float16),
+        mask=mask_s,
+    )

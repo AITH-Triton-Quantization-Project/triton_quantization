@@ -2,7 +2,7 @@ import torch
 import triton
 import triton.language as tl
 
-from int4_quantization.kernels import QuantizedWeight
+from int4_quantization.quantize import QuantizedWeight
 
 # общие константы тайлинга
 _BLOCK_M, _BLOCK_N, _BLOCK_K, _GROUP_M = 64, 64, 64, 8
