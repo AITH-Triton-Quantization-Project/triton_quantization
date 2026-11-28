@@ -15,6 +15,11 @@ dev = [
     "torch",
     "numpy"
 ]
+eval = [
+    "transformers>=4.45",
+    "datasets",
+    "accelerate"
+]
 
 [tool.ruff]
 # Целевая версия Python

@@ -1,0 +1,75 @@
+{
+  "gpu": "NVIDIA RTX A6000",
+  "capability": [
+    8,
+    6
+  ],
+  "dtype": "torch.bfloat16",
+  "quick": false,
+  "tokens": 289077,
+  "baseline_memory": {
+    "linear_layers": 113,
+    "quantized_layers": 0,
+    "linear_bytes": 2471493632,
+    "quantized_bytes": 0,
+    "code_bytes": 0
+  },
+  "quantized_memory": {
+    "linear_layers": 0,
+    "quantized_layers": 113,
+    "linear_bytes": 0,
+    "quantized_bytes": 656490496,
+    "code_bytes": 617873408
+  },
+  "replaced_layers": 113,
+  "baseline_reply": "The capital of France is Paris.",
+  "quantized_reply": "The capital of France is Paris.",
+  "baseline_speed": [
+    {
+      "seq_len": 128,
+      "ms": 12.832736015319824,
+      "tokens_per_s": 9974.490229300483
+    },
+    {
+      "seq_len": 512,
+      "ms": 18.128896713256836,
+      "tokens_per_s": 28242.20404022699
+    },
+    {
+      "seq_len": 2048,
+      "ms": 66.30194854736328,
+      "tokens_per_s": 30888.986596479834
+    }
+  ],
+  "quantized_speed": [
+    {
+      "seq_len": 128,
+      "ms": 162.34291076660156,
+      "tokens_per_s": 788.4545090116319
+    },
+    {
+      "seq_len": 512,
+      "ms": 205.53932189941406,
+      "tokens_per_s": 2491.0075369936285
+    },
+    {
+      "seq_len": 2048,
+      "ms": 378.9506530761719,
+      "tokens_per_s": 5404.397599991303
+    }
+  ],
+  "baseline_perplexity": {
+    "perplexity": 11.497151748072858,
+    "tokens": 289077,
+    "windows": 562
+  },
+  "quantized_perplexity": {
+    "perplexity": 15.119093512029844,
+    "tokens": 289077,
+    "windows": 562
+  },
+  "triton": {
+    "status": "error",
+    "message": "CalledProcessError: Command '['/usr/bin/gcc', '/tmp/tmpv2xqe5ej/main.c', '-O3', '-shared', '-fPIC', '-Wno-psabi', '-o', '/tmp/tmpv2xqe5ej/cuda_utils.cpython-310-x86_64-linux-gnu.so', '-lcuda', '-L/mnt/tank/scratch/igolovkin/.venv/lib/python3.10/site-packages/triton/backends/nvidia/lib', '-L/lib/x86_64-linux-gnu', '-I/mnt/tank/scratch/igolovkin/.venv/lib/python3.10/site-packages/triton/backends/nvidia/include', '-I/tmp/tmpv2xqe5ej', '-I/usr/include/python3.10']' returned non-zero exit status 1."
+  }
+}
