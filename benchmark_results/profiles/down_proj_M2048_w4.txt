@@ -1,11 +1,11 @@
 ---------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
                        Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
 ---------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
-            _w4_gemm_kernel         0.00%       0.000us         0.00%       0.000us       0.000us      16.419ms       100.00%      16.419ms       2.052ms             8  
-                aten::empty         0.50%      87.800us         0.50%      87.800us      10.975us       0.000us         0.00%       0.000us       0.000us             8  
-    Activity Buffer Request         5.22%     914.200us         5.22%     914.200us     914.200us       0.000us         0.00%       0.000us       0.000us             1  
-           cuLaunchKernelEx         4.71%     825.400us         4.71%     825.400us     103.175us       0.000us         0.00%       0.000us       0.000us             8  
-      cudaDeviceSynchronize        89.57%      15.686ms        89.57%      15.686ms       7.843ms       0.000us         0.00%       0.000us       0.000us             2  
+            _w4_gemm_kernel         0.00%       0.000us         0.00%       0.000us       0.000us      18.218ms       100.00%      18.218ms       2.277ms             8  
+                aten::empty         0.54%     103.700us         0.54%     103.700us      12.963us       0.000us         0.00%       0.000us       0.000us             8  
+    Activity Buffer Request         5.93%       1.144ms         5.93%       1.144ms       1.144ms       0.000us         0.00%       0.000us       0.000us             1  
+           cuLaunchKernelEx         2.18%     421.200us         2.18%     421.200us      52.650us       0.000us         0.00%       0.000us       0.000us             8  
+      cudaDeviceSynchronize        91.35%      17.620ms        91.35%      17.620ms       8.810ms       0.000us         0.00%       0.000us       0.000us             2  
 ---------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
-Self CPU time total: 17.514ms
-Self CUDA time total: 16.419ms
+Self CPU time total: 19.289ms
+Self CUDA time total: 18.218ms

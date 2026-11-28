@@ -79,8 +79,13 @@ def _w4_gemm_kernel(
             mask=((k0 // 2 + offs_kh)[:, None] < (K // 2)) & (offs_n[None, :] < N),
             other=0,
         )
-        w_lo = (wq & 0x0F).to(tl.int32)
-        w_hi = ((wq >> 4) & 0x0F).to(tl.int32)
+        # int8 знаковый, поэтому сначала берём исходный байт, затем нибблы.
+        # 8..15 в ниббле — это коды -8..-1.
+        byte = wq.to(tl.int32) & 0xFF
+        w_lo = byte & 0x0F
+        w_hi = (byte >> 4) & 0x0F
+        w_lo = tl.where(w_lo >= 8, w_lo - 16, w_lo)
+        w_hi = tl.where(w_hi >= 8, w_hi - 16, w_hi)
 
         g = k0 // GROUP_SIZE
         s = tl.load(s_ptr + g * ssg + offs_n * ssn,
@@ -90,8 +95,10 @@ def _w4_gemm_kernel(
 
         w_lo_bf = (w_lo.to(tl.bfloat16) - z[None, :]) * s[None, :]
         w_hi_bf = (w_hi.to(tl.bfloat16) - z[None, :]) * s[None, :]
-
-        w_bf = tl.reshape(tl.join(w_lo_bf, w_hi_bf), (BLOCK_K, BLOCK_N))
+        # join даёт [BLOCK_K/2, BLOCK_N, 2]. Чётный индекс K — младший ниббл,
+        # поэтому пара должна стать соседними строками, а не соседними столбцами.
+        w_pair = tl.permute(tl.join(w_lo_bf, w_hi_bf), (0, 2, 1))
+        w_bf = tl.reshape(w_pair, (BLOCK_K, BLOCK_N))
         acc += tl.dot(a, w_bf, out_dtype=tl.float32)
 
     tl.store(
@@ -153,6 +160,9 @@ def _launch_w4_gemm(X, W: QuantizedWeight, out):
     M, K = X.shape
     Kh, N = W.q.shape
     assert Kh * 2 == K
+    assert W.group_size % _BLOCK_K == 0, (
+        "group_size должен делиться на BLOCK_K: один масштаб на весь K-тайл"
+    )
 
     _w4_gemm_kernel[_grid(M, N)](
         X, W.q, W.scales, W.zeros, out, M, N, K,

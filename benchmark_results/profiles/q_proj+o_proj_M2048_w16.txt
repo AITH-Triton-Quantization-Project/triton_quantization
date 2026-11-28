@@ -1,13 +1,13 @@
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
                                                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
-                                               aten::mm         6.27%     271.700us        33.73%       1.461ms     182.625us       3.113ms       100.00%       3.502ms     437.799us             8  
-ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_3...         0.00%       0.000us         0.00%       0.000us       0.000us       3.113ms       100.00%       3.113ms     389.115us             8  
-                                Activity Buffer Request        15.59%     675.300us        15.59%     675.300us     675.300us     389.471us        12.51%     389.471us     389.471us             1  
-                                           aten::matmul         0.97%      41.800us        34.70%       1.503ms     187.850us       0.000us         0.00%       3.502ms     437.799us             8  
-          cudaOccupancyMaxActiveBlocksPerMultiprocessor         0.39%      17.000us         0.39%      17.000us       2.125us       0.000us         0.00%       0.000us       0.000us             8  
-                                       cudaLaunchKernel        11.48%     497.000us        11.48%     497.000us      62.125us       0.000us         0.00%       0.000us       0.000us             8  
-                                  cudaDeviceSynchronize        65.30%       2.828ms        65.30%       2.828ms       1.414ms       0.000us         0.00%       0.000us       0.000us             2  
+                                               aten::mm         7.30%     360.600us        42.60%       2.103ms     262.912us       3.346ms       100.00%       3.735ms     466.849us             8  
+ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_3...         0.00%       0.000us         0.00%       0.000us       0.000us       3.346ms       100.00%       3.346ms     418.188us             8  
+                                Activity Buffer Request        22.50%       1.111ms        22.50%       1.111ms       1.111ms     389.280us        11.64%     389.280us     389.280us             1  
+                                           aten::matmul         1.14%      56.500us        43.74%       2.160ms     269.975us       0.000us         0.00%       3.735ms     466.849us             8  
+          cudaOccupancyMaxActiveBlocksPerMultiprocessor         0.56%      27.700us         0.56%      27.700us       3.463us       0.000us         0.00%       0.000us       0.000us             8  
+                                       cudaLaunchKernel        12.23%     604.000us        12.23%     604.000us      75.500us       0.000us         0.00%       0.000us       0.000us             8  
+                                  cudaDeviceSynchronize        56.26%       2.778ms        56.26%       2.778ms       1.389ms       0.000us         0.00%       0.000us       0.000us             2  
 -------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
-Self CPU time total: 4.331ms
-Self CUDA time total: 3.113ms
+Self CPU time total: 4.938ms
+Self CUDA time total: 3.346ms
